@@ -1015,21 +1015,21 @@ vector<Button> Collective::fillButtons(const vector<BuildInfo>& buildInfo) const
 vector<Collective::TechInfo> Collective::getTechInfo() const {
   vector<TechInfo> ret;
   ret.push_back({{ViewId::BILE_DEMON, "Humanoids", 'h'},
-      [this](View* view) { handleHumanoidBreeding(view); }});
+      [this](View* view) { const_cast<Collective*>(this)->handleHumanoidBreeding(view); }});
   ret.push_back({{ViewId::BEAR, "Beasts", 's'},
-      [this](View* view) { handleBeastTaming(view); }}); 
+      [this](View* view) { const_cast<Collective*>(this)->handleBeastTaming(view); }}); 
   if (hasTech(TechId::GOLEM))
     ret.push_back({{ViewId::IRON_GOLEM, "Golems", 'm'},
-      [this](View* view) { handleMatterAnimation(view); }});      
+      [this](View* view) { const_cast<Collective*>(this)->handleMatterAnimation(view); }});      
   if (hasTech(TechId::NECRO))
     ret.push_back({{ViewId::VAMPIRE, "Necromancy", 'n'},
-      [this](View* view) { handleNecromancy(view); }});
-  ret.push_back({{ViewId::MANA, "Sorcery"}, [this](View* view) {handlePersonalSpells(view);}});
+      [this](View* view) { const_cast<Collective*>(this)->handleNecromancy(view); }});
+  ret.push_back({{ViewId::MANA, "Sorcery"}, [this](View* view) {const_cast<Collective*>(this)->handlePersonalSpells(view);}});
   ret.push_back({{ViewId::EMPTY, ""}, [](View*) {}});
   ret.push_back({{ViewId::LIBRARY, "Library", 'l'},
-      [this](View* view) { handleLibrary(view); }});
+      [this](View* view) { const_cast<Collective*>(this)->handleLibrary(view); }});
   ret.push_back({{ViewId::GOLD, "Black market"},
-      [this](View* view) { handleMarket(view); }});
+      [this](View* view) { const_cast<Collective*>(this)->handleMarket(view); }});
   ret.push_back({{ViewId::EMPTY, ""}, [](View*) {}});
   ret.push_back({{ViewId::BOOK, "Keeperopedia"},
       [this](View* view) { model->keeperopedia.present(view); }});

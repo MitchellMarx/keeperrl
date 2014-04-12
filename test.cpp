@@ -224,17 +224,17 @@ void testVec2() {
   checkEqual(Vec2(3, 3).approxL1(), make_pair(Vec2(1, 1), Vec2(1, 1)));
   checkEqual(Vec2(3, 1).approxL1(), make_pair(Vec2(1, 1), Vec2(1, 0)));
 
-  CHECKEQ(Vec2(1, 0).getBearing(), "east");
-  CHECKEQ(Vec2(3, 1).getBearing(), "east");
-  CHECKEQ(Vec2(1, 1).getBearing(), "south-east");
-  CHECKEQ(Vec2(2, 1).getBearing(), "south-east");
-  CHECKEQ(Vec2(0, 1).getBearing(), "south");
-  CHECKEQ(Vec2(-1, 3).getBearing(), "south");
-  CHECKEQ(Vec2(-1, 1).getBearing(), "south-west");
-  CHECKEQ(Vec2(-1, 0).getBearing(), "west");
-  CHECKEQ(Vec2(-1, -1).getBearing(), "north-west");
-  CHECKEQ(Vec2(0, -1).getBearing(), "north");
-  CHECKEQ(Vec2(1, -1).getBearing(), "north-east");
+  CHECKEQ(getCardinalName(Vec2(1, 0).getBearing().getCardinalDir()), "east");
+  CHECKEQ(getCardinalName(Vec2(3, 1).getBearing().getCardinalDir()), "east");
+  CHECKEQ(getCardinalName(Vec2(1, 1).getBearing().getCardinalDir()), "south-east");
+  CHECKEQ(getCardinalName(Vec2(2, 1).getBearing().getCardinalDir()), "south-east");
+  CHECKEQ(getCardinalName(Vec2(0, 1).getBearing().getCardinalDir()), "south");
+  CHECKEQ(getCardinalName(Vec2(-1, 3).getBearing().getCardinalDir()), "south");
+  CHECKEQ(getCardinalName(Vec2(-1, 1).getBearing().getCardinalDir()), "south-west");
+  CHECKEQ(getCardinalName(Vec2(-1, 0).getBearing().getCardinalDir()), "west");
+  CHECKEQ(getCardinalName(Vec2(-1, -1).getBearing().getCardinalDir()), "north-west");
+  CHECKEQ(getCardinalName(Vec2(0, -1).getBearing().getCardinalDir()), "north");
+  CHECKEQ(getCardinalName(Vec2(1, -1).getBearing().getCardinalDir()), "north-east");
 }
 
 void testConcat() {
@@ -328,7 +328,7 @@ void testTransform2() {
   vector<int> v { 5, 4, 3, 2, 1};
   vector<string> s { "s5", "s4", "s3", "s2", "s1" };
   function<string(const int&)> func = [](const int& a) { return "s" + convertToString(a); };
-  vector<string> res = transform2(v, func);
+  vector<string> res = transform2<string,int,function<string(const int&)>>(v, func);
   CHECKEQ(res, s);
 }
 
